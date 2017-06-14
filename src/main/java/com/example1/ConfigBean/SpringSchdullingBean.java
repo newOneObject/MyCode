@@ -20,7 +20,7 @@ import java.util.Date;
 public class SpringSchdullingBean {
 
     public void work(){
-        //这儿插入具体的调度任务.
+        //这儿插入具体的调度任务..
         /*System.out.println ("AAAA任务执行，时间:" + dateFormat ().format (new Date ()));*/
     }
 
