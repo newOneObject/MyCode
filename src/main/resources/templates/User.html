@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <script src="../static/js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/js/sui.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../static/js/doT.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<style>
+    .box{
+        width: 300px;
+        height: 180px;
+        border: solid seashell;
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+        background:url(my.jpg);
+    }
+    .center{
+        border: solid seashell;
+        width: 250px;
+        height: 150px;
+        margin:0 auto;
+    }
+   div{
+       margin:0 auto;
+   }
+    input{
+        margin:0 auto;
+    }
+    body{
+        background:url(my.jpg);
+        background-size: cover;
+        width: 100%;
+        padding:0;
+    }
+
+</style>
+<body>
+<form style="margin:0 auto" class="sui-form form-horizontal">
+<div style="background-color: b " class="box">
+    <div class="center" style="background-color: mediumvioletred ">
+        <input type="hidden" id="userId" value="1"/>
+        <div class="control-group">
+            <label for="userName" class="control-label" >用户名：</label>
+            <div class="controls">
+                <input  th:value="(${user}!=null)? ${user.userName}: '' " type="text" id="userName" placeholder="userName"/>
+
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="inputPassword" class="control-label" >密码:</label>
+            <div class="controls">
+                <input th:value="(${user}!=null)? ${user.passWord}: '' " type="password" id="inputPassword" placeholder="Password"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <label data-toggle="checkbox" class="checkbox-pretty inline">
+                    <input type="checkbox" name="remember-me"/><span>记住我</span>
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button type="submit" class="sui-btn btn-primary login" style="color:green" >Sign in</button>
+                <button  class="sui-btn btn-primary add" style="color:red " >To register</button>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        var flag =$("#inputPassword").val();
+        if(flag==null||flag==''){
+            $("input[name=remember-me]").attr("checked",false);
+        }else{
+            $("input[name=remember-me]").attr("checked",true);
+        }
+
+        $(".login").on("click",function () {
+            if(_submit()) {
+                window.location.href = "/index1";
+                window.event.returnValue=false;
+            }
+        })
+
+        $(".add").on("click",function () {
+            alert(2);
+            $.get("/toRegister");
+        })
+
+    });
+    function _submit() {
+        var flag =false;
+        var remember = $("input[name=remember-me]:checked").next().text();
+        datas={};
+        datas.userName=$("#userName").val();
+        datas.passWord=$("#inputPassword").val();
+        datas.userId=$("#userId").val();
+        datas.remember=remember;
+        if(!datas.userName) {
+            alert("请输入用户名！");
+            return false;
+        }
+        if(!datas.passWord){
+            alert("请输入正确的密码！");
+            return false;
+        }
+        if(!datas.userId){
+            alert("~!!");
+            return false;
+        }
+        $.ajax({
+            type: 'post',
+            url: "/login",
+            async: false,
+            data: datas,
+            success: function (data) {
+                console.log(data);
+                if(data.status=="ok"){
+                    alert("登录成功！");
+                    flag=true;
+                    window.location.href = "/index1";
+                }else {
+                    alert("没有该用户！")
+                    flag=false;
+                }
+            }
+        });
+        return flag;
+    }
+
+</script>
