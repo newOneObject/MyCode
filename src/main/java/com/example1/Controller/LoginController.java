@@ -28,7 +28,7 @@ import java.util.Queue;
  * Created by Administrator on 2017/5/9.
  */
 @Controller
-public class UserController {
+public class LoginController {
     @Autowired
     private UserDao userDao;
 
@@ -62,7 +62,7 @@ public class UserController {
             e.printStackTrace();
         }
         //如果Cookie中没有值，直接返回页面
-        mv.setViewName("User");
+        mv.setViewName("Login");
         return mv;
     }
 
