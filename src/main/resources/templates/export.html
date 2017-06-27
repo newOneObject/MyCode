@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>测试cvs</title>
+
+    <style type="text/css">
+        body{ font-size:14px;}
+        input{ vertical-align:middle; margin:0; padding:0}
+        .file-box{ position:relative;width:340px}
+        .txt{ height:22px; border:1px solid #cdcdcd; width:180px;}
+        .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:24px; width:70px;}
+        .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
+    </style>
+</head>
+<body>
+     <div>
+         <p>第一步：   <a href="/download">下载导入商品模板</a></p>
+         <p>
+         <div class="file-box">
+             <form action="" method="post" enctype="multipart/form-data">
+                 第二步： <input type='button' class='btn' value='选择文件' />
+                 <input type='text' name='textfield' id='textfield' class='txt' />
+
+                 <input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value" />
+                <!-- <input type="submit" name="submit" class="btn" value="上传" />-->
+             </form>
+         </div>
+         </p>
+         <p>第三步：   确认导入<button>确认导入</button></p>
+         <div>
+             <table class="sui-table table-bordered table-zebra" style="width:100%;border: 1px solid #CCCCCC;">
+             <tr>
+                 <td>商品编码</td>
+                 <td>商品标题</td>
+                 <td>单价（元）</td>
+                 <td>规格</td>
+                 <td>数量</td>
+                 <td>状态</td>
+             </tr>
+             <tr>
+                 <td>20172201</td>
+                 <td>复方阿娇儿</td>
+                 <td>110.20</td>
+                 <td>6x12</td>
+                 <td>15</td>
+                 <td>导入成功</td>
+             </tr>
+             </table>
+         </div>
+     </div>
+</body>
+</html>
